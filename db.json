@@ -1,0 +1,90 @@
+{
+  "currentPerson":
+  {
+    "id": 1,
+    "name": "Test User 1",
+    "avatar": "avatar1",
+    "groupsCount": 2,
+    "importaintGroupsCount": 0,
+    "personsCount": 10,
+    "importaintPersonsCount": 3,
+    "persons":
+    [
+      {
+        "id": 2,
+        "name": "Test User 2",
+        "avatar": "avatar2",
+        "isImportaint": true
+      },
+      {
+        "id": 3,
+        "name": "Test User 3",
+        "avatar": "avatar3",
+        "isImportaint": false
+      },
+      {
+        "id": 4,
+        "name": "Test User 4",
+        "avatar": "avatar4",
+        "isImportaint": false
+      },
+      {
+        "id": 5,
+        "name": "Test User 5",
+        "avatar": "avatar5",
+        "isImportaint": false
+      },
+      {
+        "id": 6,
+        "name": "Test User 6",
+        "avatar": "avatar6",
+        "isImportaint": false
+      },
+      {
+        "id": 7,
+        "name": "Test User 7",
+        "avatar": "avatar7",
+        "isImportaint": false
+      },
+      {
+        "id": 8,
+        "name": "Test User 8",
+        "avatar": "avatar8",
+        "isImportaint": true
+      },
+      {
+        "id": 9,
+        "name": "Test User 9",
+        "avatar": "avatar9",
+        "isImportaint": false
+      },
+      {
+        "id": 10,
+        "name": "Test User 10",
+        "avatar": "avatar10",
+        "isImportaint": false
+      },
+      {
+        "id": 11,
+        "name": "Test User 11",
+        "avatar": "avatar11",
+        "isImportaint": false
+      },
+    ],
+    "groups":
+    [
+      {
+        "id": 1,
+        "name": "Test Group1",
+        "avatar": "grvatar1",
+        "isImportaint": false
+      },
+      {
+        "id": 2,
+        "name": "Test Group2",
+        "avatar": "grvatar2",
+        "isImportaint": false
+      },
+    ],
+  }
+
