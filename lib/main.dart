@@ -110,10 +110,17 @@ class GraphPageState extends State<GraphPage> {
   void lalala() async {
     var res = await http.get(Uri.parse("http://localhost:3000/currentPerson"));
     var data = json.decode(res.body);
-    CurrentUser currentUser = CurrentUser.fromJson(data);
-
+    var personData = data["persons"] as List;
+    var groupsData = data["groups"] as List;
+    CurrentPerson currentUser = CurrentPerson.fromJson(data);
     print(res.body.toString());
     print(currentUser.groupsCount.toString());
+    var userList =
+        personData.map<Person>((json) => Person.fromJson(json)).toList();
+    print(userList[1].name.toString());
+    var groupList =
+        groupsData.map<Group>((json) => Group.fromJson(json)).toList();
+    print(groupList[1].name.toString());
   }
 
   @override
@@ -147,7 +154,7 @@ class GraphPageState extends State<GraphPage> {
   }
 }
 
-class CurrentUser {
+class CurrentPerson {
   int? id;
   String? name;
   String? avatar;
@@ -156,7 +163,7 @@ class CurrentUser {
   int? usersCount;
   int? importaintUsersCount;
 
-  CurrentUser(
+  CurrentPerson(
       {this.id,
       this.name,
       this.avatar,
@@ -165,8 +172,8 @@ class CurrentUser {
       this.usersCount,
       this.importaintUsersCount});
 
-  factory CurrentUser.fromJson(Map<String, dynamic> json) {
-    return CurrentUser(
+  factory CurrentPerson.fromJson(Map<String, dynamic> json) {
+    return CurrentPerson(
       id: json["id"],
       name: json["name"],
       avatar: json["avatar"],
@@ -178,16 +185,16 @@ class CurrentUser {
   }
 }
 
-class User {
+class Person {
   int? id;
   String? name;
   String? avatar;
   bool? isImportaint;
 
-  User({this.id, this.name, this.avatar, this.isImportaint});
+  Person({this.id, this.name, this.avatar, this.isImportaint});
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory Person.fromJson(Map<String, dynamic> json) {
+    return Person(
         id: json["id"],
         name: json["name"],
         avatar: json["avatar"],
@@ -201,10 +208,10 @@ class Group {
   String? avatar;
   bool? isImportaint;
 
-  User({this.id, this.name, this.avatar, this.isImportaint});
+  Group({this.id, this.name, this.avatar, this.isImportaint});
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory Group.fromJson(Map<String, dynamic> json) {
+    return Group(
         id: json["id"],
         name: json["name"],
         avatar: json["avatar"],
