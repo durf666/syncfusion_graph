@@ -137,8 +137,9 @@ class GraphPageState extends State<GraphPage> {
   };
   void lalala() async {
     print(graph.runtimeType);
-    var res = await http.get(Uri.parse("http://localhost:3000/currentPerson"));
+    var res = await http.get(Uri.parse("http://localhost:3000/graph"));
     var data = json.decode(res.body);
+    print(data);
     var personData = data["persons"] as List;
     var groupsData = data["groups"] as List;
     CurrentPerson currentUser = CurrentPerson.fromJson(data);
@@ -152,6 +153,21 @@ class GraphPageState extends State<GraphPage> {
     print(groupList[1].name.toString());
   }
 
+  void bebebe() async {
+    var res = await http.get(Uri.parse("http://localhost:3000/graph"));
+    var data = json.decode(res.body);
+    var edgesData = data["edges"] as List;
+    var nodesData = data["nodes"] as List;
+    var edgesList =
+        edgesData.map<Edges>((json) => Edges.fromJson(json)).toList();
+    var nodesList =
+        nodesData.map<Nodes>((json) => Nodes.fromJson(json)).toList();
+    print(nodesList[1].name);
+    print(edgesList[5].to);
+    var graph = GraphData.fromJson(data);
+    print(graph.nodes[3].name);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,7 +176,7 @@ class GraphPageState extends State<GraphPage> {
           ElevatedButton(
             child: Text('http'),
             onPressed: () {
-              lalala();
+              bebebe();
               var node = Node.Id(1);
             },
           ),
@@ -249,8 +265,47 @@ class Group {
   }
 }
 
-class GraphData {}
+class GraphData {
+  List<Nodes> nodes;
+  List<Edges> edges;
+  static const defEdges = <Edges>[];
+  static const defNodes = <Nodes>[];
+  GraphData({this.edges = defEdges, this.nodes = defNodes});
+  factory GraphData.fromJson(json) {
+    var edgesData = json["edges"] as List;
+    var nodesData = json["nodes"] as List;
+    return GraphData(
+      edges: edgesData.map<Edges>((json) => Edges.fromJson(json)).toList(),
+      nodes: nodesData.map<Nodes>((json) => Nodes.fromJson(json)).toList(),
+    );
+  }
+}
 
-class Nodes {}
+class Nodes {
+  String? id;
+  String? name;
+  String? type;
+  bool? isImportaint;
 
-class Edges {}
+  Nodes({this.id, this.isImportaint, this.name, this.type});
+  factory Nodes.fromJson(Map<String, dynamic> json) {
+    return Nodes(
+      id: json["id"],
+      name: json["name"],
+      type: json["type"],
+      isImportaint: json["isImportaint"],
+    );
+  }
+}
+
+class Edges {
+  String? from;
+  String? to;
+  Edges({this.from, this.to});
+  factory Edges.fromJson(Map<String, dynamic> json) {
+    return Edges(
+      from: json["from"],
+      to: json["to"],
+    );
+  }
+}
