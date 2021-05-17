@@ -107,7 +107,36 @@ class GraphPage extends StatefulWidget {
 }
 
 class GraphPageState extends State<GraphPage> {
+  var graph = {
+    "graph": {
+      "nodes": [
+        {
+          "id": 1,
+          "name": "Test User 1 (current)",
+          "type": "currentUser",
+          "isImportaint": false
+        },
+        {"id": 2, "name": "Test User 2", "type": "user", "isImportaint": false},
+        {"id": 3, "name": "Test User 3", "type": "user", "isImportaint": true},
+        {"id": 4, "name": "Test User 4", "type": "user", "isImportaint": false},
+        {"id": 5, "name": "Test User 5", "type": "user", "isImportaint": false},
+        {"id": 6, "name": "Test User 6", "type": "user", "isImportaint": false},
+        {"id": 7, "name": "Test Group 1", "type": "user", "isImportaint": true},
+        {"id": 8, "name": "Test Group 2", "type": "user", "isImportaint": false}
+      ],
+      "edges": [
+        {"from": 1, "to": 2},
+        {"from": 1, "to": 3},
+        {"from": 1, "to": 4},
+        {"from": 1, "to": 5},
+        {"from": 1, "to": 6},
+        {"from": 1, "to": 7},
+        {"from": 1, "to": 8}
+      ]
+    }
+  };
   void lalala() async {
+    print(graph.runtimeType);
     var res = await http.get(Uri.parse("http://localhost:3000/currentPerson"));
     var data = json.decode(res.body);
     var personData = data["persons"] as List;
@@ -132,6 +161,7 @@ class GraphPageState extends State<GraphPage> {
             child: Text('http'),
             onPressed: () {
               lalala();
+              var node = Node.Id(1);
             },
           ),
         ],
@@ -218,3 +248,9 @@ class Group {
         isImportaint: json["isImportaint"]);
   }
 }
+
+class GraphData {}
+
+class Nodes {}
+
+class Edges {}
